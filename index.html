@@ -1,2 +1,14 @@
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
 <script src="jquery.remote-selector.js"></script>
+
+<script>
+function imdbTop($els)
+{
+    $els.each(function(){
+        var imdb = $(this).attr('href').replace('/title/', '').replace('/', '');
+        $('body').append('<img src="http://cdn.rszr.co/w=50&q=100&imdb=' + imdb + '" style="float:left">');
+    });
+}
+
+$.remote('http://www.imdb.com/chart/top?ref_=nb_mv_3_ch table a[href*="title/tt"]', imdbTop);
+</script>
