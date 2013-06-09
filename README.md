@@ -4,6 +4,8 @@ Remote jQuery Selector
 Remote jquery selector is a simple function that allows you to select elements on a remote website using simple jquery syntax.
 All you have to do is to add a website url before some selectors and voila!
 
+A live demo can be found [here](http://youpinadi.github.io/remote-jquery-selector/)
+
 This is just for fun, of course there is a proxy involved to get the page ;)
 
 
@@ -22,3 +24,4 @@ function imdbTop($els)
 
 $.remote('http://www.imdb.com/chart/top?ref_=nb_mv_3_ch table a[href*="title/tt"]', imdbTop);
 ```
+
