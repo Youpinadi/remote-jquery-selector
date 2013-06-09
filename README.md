@@ -14,9 +14,13 @@ You can do lots of cool stuff very quickly:
 // query imdb's top 250 and display the movies covers
 function imdbTop($els)
 {
-    $els.each(function(){
+    var $body = $('body');
+    $els.each(function(index){
         var imdb = $(this).attr('href').replace('/title/', '').replace('/', '');
-        $('body').append('<img src="http://cdn.rszr.co/w=50&q=100&imdb=' + imdb + '" style="float:left">');
+        $('<img>')
+            .attr('src', 'http://cdn.rszr.co/w=50&h=74&q=100&imdb=' + imdb)
+            .attr('title', '#' + index + ' - ' + $(this).html()).
+            appendTo($body);
     });
 }
 
