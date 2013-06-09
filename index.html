@@ -9,7 +9,7 @@ function imdbTop($els)
     $els.each(function(index){
         var imdb = $(this).attr('href').replace('/title/', '').replace('/', '');
         $('<img>')
-            .attr('src', 'http://cdn.rszr.co/w=50&h=74&q=100&imdb=' + imdb)
+            .attr('src', 'http://cdn.rszr.co/w=200&h=296&q=100&imdb=' + imdb)
             .attr('title', '#' + (index + 1) + ' - ' + $(this).html()).
             appendTo($body);
     });
@@ -25,8 +25,24 @@ $.remote('http://www.imdb.com/chart/top?ref_=nb_mv_3_ch table a[href*="title/tt"
     img
     {
         float:left;
+        width: 50;
+        height: 74;
         border-radius: 2px;
         margin:3px;
+        -webkit-transition: all .1s linear;
+           -moz-transition: all .1s linear;
+            -ms-transition: all .1s linear;
+             -o-transition: all .1s linear;
+                transition: all .1s linear;
     }
+    img:hover
+    {
+        -webkit-transform: scale(4);
+           -moz-transform: scale(4);
+            -ms-transform: scale(4);
+             -o-transform: scale(4);
+                transform: scale(4);
+    }
+
 </style>
 </html>
