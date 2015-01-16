@@ -13,19 +13,25 @@ You can do lots of cool stuff very quickly:
 
 
 ```javascript
-// query imdb's top 250 and display the movies covers
-function imdbTop($els)
+// generates a random album cover
+function cleanTitle(title)
 {
-    var $body = $('body');
-    $els.each(function(index){
-        var imdb = $(this).attr('href').replace('/title/', '').replace('/', '');
-        $('<img>')
-            .attr('src', 'http://cdn.rszr.co/w=50&h=74&q=100&imdb=' + imdb)
-            .attr('title', '#' + index + ' - ' + $(this).html()).
-            appendTo($body);
-    });
+    return title
+        .replace(/[A-Z]{2,}/g, '')
+        .replace(/[0-9]/g, '')
+        .replace(/[\W]+/g, ' ').split(' ').slice(0, 3).join(' ')
 }
 
-$.remote('http://www.imdb.com/chart/top?ref_=nb_mv_3_ch table a[href*="title/tt"]', imdbTop);
+function generateAlbum()
+{
+    $.remote('http://en.wikipedia.org/wiki/Special:Random #firstHeading span, http://www.flickr.com/explore/interesting/7days img.pc_img, http://randomamazonproduct.com .amazon-title')
+        .then(function ($title, $cover, $quote) {
+            var $album = $('.album');
+            $album.find('h1').html(cleanTitle($title.text()));
+            $album.css({'background-image': 'url("' + $cover.eq(3).attr('src') + '")'});
+            $album.find('h3').html(cleanTitle($quote.text()));
+        });
+}
+generateAlbum();
 ```
 
