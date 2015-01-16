@@ -1,48 +1,43 @@
 <html>
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
-<script src="jquery.remote-selector.js"></script>
+    <head>
+        <title>Album cover generator</title>
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+        <h1>Random album generator</h1>
+        <h4>Band name is a random wikipedia article, cover is a random flickr picture, album name is a random amazon product</h4>
 
-<script>
-function imdbTop($els)
-{
-    var $body = $('body');
-    $els.each(function(index){
-        var imdb = $(this).attr('href').replace('/title/', '').replace('/', '');
-        $('<img>')
-            .attr('src', 'http://cdn.rszr.co/w=200&h=296&q=100&imdb=' + imdb)
-            .attr('title', '#' + (index + 1) + ' - ' + $(this).html()).
-            appendTo($body);
-    });
-}
+        <div class="album">
+            <div class="dimmer"></div>
+            <h1></h1>
+            <h3></h3>
+        </div>
 
-$.remote('http://www.imdb.com/chart/top?ref_=nb_mv_3_ch table a[href*="title/tt"]', imdbTop);
-</script>
-<style>
-    body
-    {
-        background-color: #000;
-    }
-    img
-    {
-        float:left;
-        width: 50;
-        height: 74;
-        border-radius: 2px;
-        margin:3px;
-        -webkit-transition: all .1s linear;
-           -moz-transition: all .1s linear;
-            -ms-transition: all .1s linear;
-             -o-transition: all .1s linear;
-                transition: all .1s linear;
-    }
-    img:hover
-    {
-        -webkit-transform: scale(4);
-           -moz-transform: scale(4);
-            -ms-transform: scale(4);
-             -o-transform: scale(4);
-                transform: scale(4);
-    }
+        <button>Generate an other one!</button>
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+        <script src="jquery.remote-selector.js"></script>
 
-</style>
+        <script>
+        function cleanTitle(title)
+        {
+            return title
+                .replace(/[A-Z]{2,}/g, '')
+                .replace(/[0-9]/g, '')
+                .replace(/[\W]+/g, ' ').split(' ').slice(0, 3).join(' ')
+        }
+
+        function generateAlbum()
+        {
+            $.remote('http://en.wikipedia.org/wiki/Special:Random #firstHeading span, http://www.flickr.com/explore/interesting/7days img.pc_img, http://randomamazonproduct.com .amazon-title')
+                .then(function ($title, $cover, $quote) {
+                    var $album = $('.album');
+                    $album.find('h1').html(cleanTitle($title.text()));
+                    $album.css({'background-image': 'url("' + $cover.eq(3).attr('src') + '")'});
+                    $album.find('h3').html(cleanTitle($quote.text()));
+                });
+        }
+        generateAlbum();
+        $('button').on('click', generateAlbum);
+        </script>
+    </body>
 </html>
