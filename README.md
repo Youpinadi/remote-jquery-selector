@@ -28,7 +28,7 @@ function generateAlbum()
         .then(function ($title, $cover, $quote) {
             var $album = $('.album');
             $album.find('h1').html(cleanTitle($title.text()));
-            $album.css({'background-image': 'url("' + $cover.eq(3).attr('src') + '")'});
+            $album.css({'background-image': 'url("' + $cover.filter(function(x){return x.width >= 240 && x.height >= 240}).attr('src') + '")'});
             $album.find('h3').html(cleanTitle($quote.text()));
         });
 }
