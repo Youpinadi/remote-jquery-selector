@@ -28,7 +28,7 @@
 
         function generateAlbum()
         {
-            $.remote('http://en.wikipedia.org/wiki/Special:Random #firstHeading span, http://www.flickr.com/explore/interesting/7days img.pc_img, http://randomamazonproduct.com .amazon-title')
+            $.remote('http://en.wikipedia.org/wiki/Special:Random #firstHeading, http://www.flickr.com/explore/interesting/7days img.pc_img, http://randomamazonproduct.com .amazon-title')
                 .then(function ($title, $cover, $quote) {
                     var $album = $('.album');
                     $album.find('h1').html(cleanTitle($title.text()));
