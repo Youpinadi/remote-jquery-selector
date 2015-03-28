@@ -28,11 +28,11 @@
 
         function generateAlbum()
         {
-            $.remote('http://en.wikipedia.org/wiki/Special:Random #firstHeading, https://500px.com/popular .photo img, http://randomamazonproduct.com .amazon-title')
+            $.remote('http://en.wikipedia.org/wiki/Special:Random #firstHeading, http://www.flickr.com/explore/interesting/7days img.pc_img, http://randomamazonproduct.com .amazon-title')
                 .then(function ($title, $cover, $quote) {
                     var $album = $('.album');
                     $album.find('h1').html(cleanTitle($title.text()));
-                    $album.css({'background-image': 'url("' + $cover.filter(function(x){return x.width >= 240 && x.height >= 240}).attr('src') + '")'});
+                    $album.css({'background-image': 'url("' + $cover.attr('src') + '")'});
                     $album.find('h3').html(cleanTitle($quote.text()));
                 });
         }
