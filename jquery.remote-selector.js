@@ -9,18 +9,18 @@
             if (match.length)
             {
                 var url = match[1];
+                var query = "select * from html where url='" + url + "'"
                 var selector = match[2];
-                $.ajax({
-                    url: 'http://dom-perignon.appspot.com/get?url=' + url,
-                    dataType: 'jsonp'
-                }).then(function(response){
+                $.get(
+                 'http://query.yahooapis.com/v1/public/yql?q=' + encodeURIComponent(query) + '&format=xml',
+                 function(response){
                     if (selector)
                     {
                         deffered.resolve($(response).find(selector));
                     }
                     else
                     {
-                        deffered.resolve(response);
+                        deffered.resolve($(response));
                     }
                 });
             }
