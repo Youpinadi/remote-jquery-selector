@@ -14,23 +14,21 @@ You can do lots of cool stuff very quickly:
 
 ```javascript
 // generates a random album cover
-function cleanTitle(title)
-{
-    return title
-        .replace(/[A-Z]{2,}/g, '')
-        .replace(/[0-9]/g, '')
-        .replace(/[\W]+/g, ' ').split(' ').slice(0, 3).join(' ')
+const cleanTitle = (title) => {
+  return title
+    .replace(/[A-Z]{2,}/g, '')
+    .replace(/[0-9]/g, '')
+    .replace(/[\W]+/g, ' ').split(' ').slice(0, 3).join(' ')
 }
 
-function generateAlbum()
-{
-    $.remote('http://en.wikipedia.org/wiki/Special:Random #firstHeading span, http://www.flickr.com/explore/interesting/7days img.pc_img, http://randomamazonproduct.com .amazon-title')
-        .then(function ($title, $cover, $quote) {
-            var $album = $('.album');
-            $album.find('h1').html(cleanTitle($title.text()));
-            $album.css({'background-image': 'url("' + $cover.filter(function(x){return x.width >= 240 && x.height >= 240}).attr('src') + '")'});
-            $album.find('h3').html(cleanTitle($quote.text()));
-        });
+const generateAlbum = () => {
+  $.remote('http://en.wikipedia.org/wiki/Special:Random #firstHeading span, http://www.flickr.com/explore/interesting/7days img.pc_img, http://randomamazonproduct.com .amazon-title')
+    .then(($title, $cover, $quote) => {
+      var $album = $('.album');
+      $album.find('h1').html(cleanTitle($title.text()));
+      $album.css({'background-image': 'url("' + $cover.filter(function(x){return x.width >= 240 && x.height >= 240}).attr('src') + '")'});
+      $album.find('h3').html(cleanTitle($quote.text()));
+    })
 }
 generateAlbum();
 ```
